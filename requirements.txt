@@ -1,6 +1,7 @@
 fastapi
 uvicorn[standard]
 openai
+langchain
 pinecone
 pydantic
 httpx
