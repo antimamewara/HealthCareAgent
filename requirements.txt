@@ -1,0 +1,9 @@
+fastapi
+uvicorn[standard]
+openai
+pinecone
+pydantic
+httpx
+python-dotenv
+dotenv
+typing

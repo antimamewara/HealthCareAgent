@@ -1,0 +1,27 @@
+[
+  {
+    "_id":"1",
+    "patient_id": "P1",
+    "doc_id": "encounter-2024-01-10",
+    "date": "2024-01-10",
+    "type": "discharge_summary",
+    "chunk_text": "Patient diagnosed with Type 2 Diabetes and started on Metformin 500mg."
+  },
+  {
+    "_id":"2",
+    "patient_id": "P2",
+    "doc_id": "lab-2024-03-15",
+    "date": "2024-03-15",
+    "type": "lab_report",
+    "chunk_text": "HbA1c level 7.2%."
+  },
+  {
+    "_id":"3",
+    "patient_id": "P3",
+    "doc_id": "lab-2024-03-15",
+    "date": "2024-03-15",
+    "type": "lab_report",
+    "chunk_text": "HbA1c level 7.2%."
+  }
+]
+  

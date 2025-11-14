@@ -1,0 +1,91 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Launch Selected Python File",
+            "program": "${workspaceFolder}/${input:programPath}",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "justMyCode": true
+        },
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Launch FastAPI (uvicorn)",
+            "module": "uvicorn",
+            "args": [
+                "${input:uvicornApp}",
+                "--reload",
+                "--port",
+                "8000"
+            ],
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "justMyCode": true
+        },
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Run Streamlit App",
+            "module": "streamlit",
+            "args": [
+                "run",
+                "${input:streamlitFile}"
+            ],
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "justMyCode": true
+        },
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Debug ingest_script.py",
+            "program": "${workspaceFolder}/ingest_script.py",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "justMyCode": true
+        },
+        {
+            "type": "python",
+            "request": "launch",
+            "name": "Debug main.py",
+            "program": "${workspaceFolder}/main.py",
+            "console": "integratedTerminal",
+            "envFile": "${workspaceFolder}/.env",
+            "justMyCode": true
+        }
+    ],
+    "inputs": [
+        {
+            "id": "programPath",
+            "type": "pickString",
+            "description": "Select the Python file to run (relative to workspace root)",
+            "options": [
+                "main.py",
+                "app_server.py",
+                "agent.py",
+                "ingest_script.py",
+                "langchainagent.py",
+                "streamlitui.py",
+                "langchain-fastapi-chat/src/main.py"
+            ]
+        },
+        {
+            "id": "uvicornApp",
+            "type": "promptString",
+            "description": "Enter the uvicorn ASGI app string (e.g. app_server:app or src.main:app)"
+        },
+        {
+            "id": "streamlitFile",
+            "type": "pickString",
+            "description": "Select the Streamlit file to run (relative to workspace root)",
+            "options": [
+                "agent.py",
+                "streamlitui.py",
+                "langchainagent.py"
+            ]
+        }
+    ]
+}
