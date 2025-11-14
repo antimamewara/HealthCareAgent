@@ -8,6 +8,7 @@ Small LangChain-based chat agent with Pinecone vector store and FastAPI backend.
 - OpenAI (via langchain_openai) chat model for generation
 - Ingest script to upsert documents into Pinecone
 - Debug-friendly logging and VS Code launch configs
+- Optional LangSmith tracing for model & agent observability
 
 ## Prerequisites
 - Python 3.9+ installed
@@ -23,6 +24,33 @@ Environment variables (set before running)
 - MODEL_NAME — model id (default: `gpt-4o-mini`)
 
 Do NOT commit API keys to Git.
+
+## LangSmith tracing (optional)
+LangSmith provides traces and visualizations for LangChain runs (models, prompts, tools, agents).
+
+- Install the LangSmith client (if not present):
+```powershell
+pip install langsmith
+```
+
+- Set LangSmith environment variables:
+```powershell
+$env:LANGSMITH_API_KEY = "ls_..."
+$env:LANGSMITH_PROJECT = "my-project"
+$env:LANGSMITH_TRACING = "true"       # enable tracing in LangChain if supported
+$env:LANGSMITH_ENDPOINT = "https://api.langsmith.com"  # optional custom endpoint
+```
+
+- Enable tracing in your app (example pattern):
+```python
+import os
+from langchain import tracing
+
+if os.getenv("LANGSMITH_TRACING", "false").lower() in ("1","true","yes"):
+    tracing.configure(project=os.getenv("LANGSMITH_PROJECT"), api_key=os.getenv("LANGSMITH_API_KEY"))
+```
+
+- After enabling, run your app and inspect traces at the LangSmith web UI. Use trace ids logged by the app to find runs.
 
 ## Quick local setup (recommended)
 PowerShell:
@@ -55,7 +83,7 @@ docker run --rm -p 8000:8000 -e OPENAI_API_KEY="sk_..." -e PINECONE_API_KEY="pc_
 Common Docker error: `open //./pipe/dockerDesktopLinuxEngine` — start Docker Desktop or switch context.
 
 ## API
-POST /ask
+POST /ask  
 Request JSON:
 ```json
 {
@@ -90,6 +118,7 @@ python ingest_script.py
 
 ## Notes
 - LangChain APIs change frequently; watch deprecation warnings and update imports (e.g., langchain_openai).
-- If you need help adapting to a different LLM backend or Pinecone SDK version, open an issue or ask for guidance.
+- LangSmith integration is optional but useful for debugging/observability.
+- If you need help adapting to a different LLM backend or Pinecone SDK version, ask for guidance.
 
 License: MIT (or choose appropriate license)
