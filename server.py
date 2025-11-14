@@ -11,15 +11,19 @@ from pinecone import Pinecone, ServerlessSpec
 from langchain_core.prompts import PromptTemplate
 import logging
 import json
+from dotenv import load_dotenv
 app = FastAPI()
-
+load_dotenv()
 # configure logging
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 logger = logging.getLogger(__name__)
 
 # llm = ChatOpenAI(model_name= os.getenv("MODEL_NAME","gpt-4o-mini"), temperature=0.0, openai_api_key=os.getenv("OPENAI_API_KEY"))
 os.environ["OPENAI_API_KEY"] = os.getenv("OPENAI_API_KEY")
-
+# os.environ["LANGSMITH_API_KEY"] = os.getenv("LANGSMITH_API_KEY")
+# os.environ["LANGSMITH_TRACING"] = os.getenv("LANGSMITH_TRACING")
+# os.environ["LANGSMITH_PROJECT"] = os.getenv("LANGSMITH_PROJECT")
+# os.environ["LANGSMITH_ENDPOINT"] = os.getenv("LANGSMITH_ENDPOINT")
 
 OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")
 INDEX_NAME = os.environ.get("PINECONE_INDEX", "patient-record")
